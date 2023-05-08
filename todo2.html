@@ -1,0 +1,68 @@
+<script>
+  //updates counter for adding
+  function updateCounterAdd(){
+    let count = document.getElementById("counter").textContent;
+    count = parseInt(count)
+    let cur_counter = document.getElementById("counter");
+    if (cur_counter){
+      cur_counter.parentNode.removeChild(cur_counter);
+    }
+    let new_count = document.createElement("p");
+    new_count.appendChild(document.createTextNode(count+1))
+    new_count.setAttribute("id", "counter");
+
+    document.body.appendChild(new_count)
+  }
+
+  //updates counter for removal
+  function updateCounterRemove(){
+    let count = document.getElementById("counter").textContent;
+    if (count <= 0){
+      return false;
+    }
+    count = parseInt(count)
+    let cur_counter = document.getElementById("counter");
+    if (cur_counter){
+      cur_counter.parentNode.removeChild(cur_counter);
+    }
+    let new_count = document.createElement("p");
+    new_count.appendChild(document.createTextNode(count-1))
+    new_count.setAttribute("id", "counter");
+
+    document.body.appendChild(new_count)
+  }
+  //Adds todo item
+    function addItem() {
+      let value = document.getElementById("inputText").value;
+      let task = document.createElement("li");
+      task.appendChild(document.createTextNode(value));
+    
+      let taskList = document.getElementById("tasks");
+      taskList.appendChild(task);
+    
+      document.getElementById("inputText").value = "";
+    }
+    //Removes last item
+    function popItem(){
+        let taskList = document.querySelectorAll("#tasks li");
+        let latestTask = taskList[taskList.length - 1];
+
+    if (latestTask) {
+    latestTask.parentNode.removeChild(latestTask);
+    }
+    }
+    </script>
+    
+    <body>
+      <ol id="tasks">
+        <li >Put the items here</li>
+      </ol>
+    
+      <form>
+        <input type="text" id="inputText">
+        <button type="button" onclick="addItem(); updateCounterAdd();">Add</button>
+      </form>
+      <button type="submit" onclick="popItem(); updateCounterRemove();">remove</button>
+      <p id="counter">1</p>
+    </body>
+    
